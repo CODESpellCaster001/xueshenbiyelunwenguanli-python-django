@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}创建题目_毕业设计系统{% endblock title %}
+{% block header_1 %}<a href="{% url "topic:all_topic" %}">所有题目</a>{% endblock header_1 %}
+{% block header_2 %}创建题目{% endblock header_2 %}
+{% block topfiles %}
+    <script src="/static/vendors/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/plugins/editor.md-master/css/editormd.css"/>
+    <script src="/static/plugins/editor.md-master/editormd.js"></script>
+{% endblock topfiles %}
+{% block body %}
+
+
+    <div>
+        <form action="/topic/create/" method="post" enctype="multipart/form-data">
+            <!--            <label for="your_name">Your name: </label>
+            <input id="your_name" type="text" name="your_name" value="{{ current_name }}">
+-->
+            <label for="title">题目</label>
+            <input id="title" type="text" name="title" value="{{ title }}">
+
+            <label for="detail">描述</label>
+            <input id="detail" type="text" name="detail" value="{{ detail }}">
+
+
+            <label for="limit_num">限选人数</label>
+            <select id="limit_num" name="limit_num">
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+            </select>
+            <!--
+            <input type="file" id="file" name="file">
+            <input type="hidden" name="topic_id" value="">
+
+
+
+
+            <label for="release_time">创建时间</label>
+            <input id="release_time" name="release_time" type="text" value="{{ release_time }}">
+
+            <label for="status">题目被选择状态</label>
+            <select id="status" name="status">
+                <option value="{{ status }}">未选</option>
+                <option value="{{ status }}">已选</option>
+            </select>
+
+            <label for="accept">题目确认状态</label>
+            <select id="accept" name="accept">
+                <option value="{{ accept }}">等待命题老师和教学秘书确认中</option>
+                <option value="{{ accept }}">命题教师已确认选题，等待教秘确认</option>
+                <option value="{{ accept }}">选题通过</option>
+            </select>
+
+-->
+            <input type="submit" value="OK">
+        </form>
+
+    </div>
+
+
+{##}
+{#    <div id="test-editormd">#}
+{#        <textarea name="content" style="display:none;"></textarea>#}
+{#    </div>#}
+
+
+
+{% endblock body %}
+
+{% block bottomfiles %}
+    <script>
+        var testEditor;
+        $(function () {
+            $.get("/static/plugins/editor.md-master/examples/test.md", function (md) {
+                testEditor = editormd("test-editormd", {
+                    width: "98%",
+                    height: 730,
+                    path: '/static/plugins/editor.md-master/lib/',
+                    markdown: md,
+                    codeFold: true,
+                    saveHTMLToTextarea: true,
+                    searchReplace: true,
+                    htmlDecode: "style,script,iframe|on*",
+                    emoji: true,
+                    taskList: true,
+                    tocm: true,         // Using [TOCM]
+                    tex: true,                   // 开启科学公式TeX语言支持，默认关闭
+                    flowChart: true,             // 开启流程图支持，默认关闭
+                    sequenceDiagram: true,       // 开启时序/序列图支持，默认关闭,
+                    imageUpload: true,
+                    imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                    imageUploadURL: "/static/plugins/editor.md-master/examples/php/upload.php",
+                    {#imageUploadURL: "{% url 'blog:blog_img_upload' %}",#}
+                    onload: function () {
+                        console.log('onload', this);
+                    },
+
+                    {#/**设置主题颜色 把这些注释去掉主题就是黑色的了*/#}
+                    {#editorTheme: "pastel-on-dark",#}
+                    {#theme: "dark",#}
+                    {#previewTheme: "dark"#}
+                });
+            });
+        });
+
+    </script>
+
+
+{% endblock bottomfiles %}

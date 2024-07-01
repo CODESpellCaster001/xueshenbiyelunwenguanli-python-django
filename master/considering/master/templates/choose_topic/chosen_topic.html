@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}已选题目_毕业设计系统{% endblock title %}
+{% block header_1 %}<a href="{% url "topic:all_topic" %}">所有题目</a>{% endblock header_1 %}
+{% block header_2 %}已选题目{% endblock header_2 %}
+
+{% block body %}
+
+    <div class="card-body">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">题目名称</th>
+                <th scope="col">限选人数</th>
+                <th scope="col">指导老师</th>
+                <th scope="col">选题状态</th>
+                <th scope="col">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">{{ title }}</th>
+                    <td>{{ limit_num }}</td>
+                    <td>{{ teacher }}</td>
+                    <td>{{ user_status }}</td>
+                    <td>
+                        <button type="button" class="btn btn-outline-info"><a href="{% url "topic:topic_detail" topic_id %}">查看</a></button>
+
+                        <!--
+                        <button type="button" class="btn btn-warning">编辑</button>
+                        |
+                        <button type="button" class="btn btn-danger">删除</button>
+                        -->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock body %}
+
+

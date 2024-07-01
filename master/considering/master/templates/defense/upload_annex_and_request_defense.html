@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}论文上传及答辩申请_毕业设计系统{% endblock title %}
+{% block header_1 %}<a href="{% url "topic:all_topic" %}">所有题目</a>{% endblock header_1 %}
+{% block header_2 %}上传答辩文件{% endblock header_2 %}
+
+{% block body %}
+    <div class="content mt-3">
+
+        <div class="col-xs-6 col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    <strong>毕业论文/答辩文件上传</strong> <small> </small>
+                </div>
+                <div class="card-body card-block">
+                    <div class="form-group">
+                        <form method="post" action="/defense/upload_graduation_topic-{{ student_id }}/"
+                              enctype="multipart/form-data">
+                            <label class=" form-control-label">文件名</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-info"></i></div>
+                                <input class="form-control" type="text" name="raw_name" id="raw_name">
+                            </div>
+                            <!-- <small class="form-text text-muted">ex. 99/99/9999</small> -->
+                    </div>
+
+                    <div class="form-group">
+                        <label class=" form-control-label">文件</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-file-word-o"></i>
+                                <label for="file">选择文件</label>
+                                <input type="file" name="file" id="file">
+                                {#                                    <input type="hidden" name="lunwen", id="lunwen", value="论文">#}
+                            </div>
+                        </div>
+                        <!-- <small class="form-text text-muted">ex. (999) 999-9999</small> -->
+                    </div>
+
+                    <button type="submit" class="btn btn-outline-link btn-lg active">上传</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div> <!-- .content -->
+{% endblock body %}

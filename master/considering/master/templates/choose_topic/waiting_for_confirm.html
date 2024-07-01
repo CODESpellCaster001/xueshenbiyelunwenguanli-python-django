@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load permission_tags %}
+{% block title %}等待确认选题_毕业设计系统{% endblock title %}
+{% block header_1 %}<a href="{% url "topic:all_topic" %}">所有题目</a>{% endblock header_1 %}
+{% block header_2 %}待确认题目列表{% endblock header_2 %}
+
+{% block body %}
+
+    <div class="card-body">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">题目名称</th>
+{#                <th scope="col">题目状态</th>#}
+                <th scope="col">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for key, value in result.items %}
+                <tr>
+                    <th scope="row">{{ key.name }}</th>
+                    <td>{{ value }}</td>
+{#                    <td>{{ row.get_accept_display }}</td>#}
+                    <td>
+                        <button type="button" class="btn btn-outline-info"><a href="{% url "choose_topic:confirm_choose_topic" key.id %}">确认选题</a></button>
+                        <!--
+                        <button type="button" class="btn btn-warning">编辑</button>
+                        |
+                        <button type="button" class="btn btn-danger">删除</button>
+                        -->
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock body %}
+
+

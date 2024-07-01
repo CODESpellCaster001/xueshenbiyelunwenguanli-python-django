@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}题目详情{% endblock title %}
+{% block header_1 %}<a href="{% url "topic:all_topic" %}">所有题目</a>{% endblock header_1 %}
+{% block header_2 %}题目详情{% endblock header_2 %}
+
+{% block body %}
+    <div class="card-body">
+        <div class="typo-headers">
+            <h1 class="pb-2 display-4">{{ title }}</h1>
+            <h3 class="pb-2 display-5">出题教师：{{ teacher }}</h3>
+            <hr>
+            <h6 class="pb-4 display-5">已选人数：{{ chosen_num }}/{{ limit_num }}</h6>
+            <h6 class="pb-4 display-5">出题时间：{{ release_time }}</h6>
+            <h6 class="pb-4 display-5">最后编辑时间：{{ last_edit_time }}</h6>
+        </div>
+        <div class="typo-articles">
+            <p>
+                {{ detail }}
+            </p>
+        </div>
+    </div>
+{% endblock body %}

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load permission_tags %}
+{% block title %}所有题目_毕业设计系统{% endblock title %}
+{% block header_1 %}<a href="{% url "topic:all_topic" %}">所有题目</a>{% endblock header_1 %}
+{% block header_2 %}我的成绩与评价{% endblock header_2 %}
+
+{% block body %}
+    <div class="content mt-3">
+
+        <div class="col-lg-9">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title">成绩</strong>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">题目</th>
+                            <th scope="col">指导老师</th>
+                            <th scope="col">学生</th>
+                            <th scope="col">成绩</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for student in student_obj_list %}
+                            <tr>
+                                <th scope="row">{{ topic }}</th>
+                                <td>{{ teacher }}</td>
+                                <td>{{ student.student.name }}</td>
+                                {% if student.student.score == "" %}
+                                    <td>暂无成绩</td>
+                                {% else %}
+                                    <td>{{ student.student.score }}</td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+
+
+                    </table>
+                    <hr>
+                    <strong class="card-title">教师评价</strong>
+                    <p>{{ feedback }}</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-9">
+            <div class="card">
+                <div class="card-header">
+                    <strong>反馈</strong> 反馈你的意见给指导老师
+                </div>
+                <div class="card-body card-block">
+                    <form action="/score_feedback/set_score_set_feedback-{{ student_id }}/" method="post" enctype="multipart/form-data" class="form-horizontal">
+
+                        <div class="row form-group">
+                            <div class="col col-md-2"><label for="feedback" class=" form-control-label">反馈内容</label>
+                            </div>
+                            <div class="col-12 col-md-9"><textarea name="feedback" id="feedback" rows="9"
+                                                                   placeholder="Content..."
+                                                                   class="form-control"></textarea></div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <i class="fa fa-dot-circle-o"></i> Submit
+                            </button>
+
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div> <!-- .content -->
+
+
+{% endblock body %}

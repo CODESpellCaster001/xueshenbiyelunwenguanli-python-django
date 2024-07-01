@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load permission_tags %}
+{% block title %}个人中心_毕业设计系统{% endblock title %}
+
+
+{% block body %}
+    <div class="card-body">
+        {#    dddddddddddddd#}
+        {#    <button type="button" class="btn btn-success"><i class="fa fa-magic"></i><a href=#>&nbsp; 修改资料</a></button>#}
+        {#    #}
+        <div class="typo-headers">
+            <h1 class="pb-2 display-4">{{ name }}</h1>
+            <hr>
+            <h3 class="pb-2 display-5">{{ school }}</h3>
+            <h6 class="pb-4 display-5">{{ department }}</h6>
+            <h6 class="pb-4 display-5">{{ email }}</h6>
+
+        </div>
+        <div class="typo-articles">
+            <p>
+                {{ memo }}
+            </p>
+        </div>
+    </div>
+
+{% endblock body %}

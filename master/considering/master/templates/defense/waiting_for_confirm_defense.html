@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load permission_tags %}
+{% block title %}等待确认答辩_毕业设计系统{% endblock title %}
+{% block header_1 %}<a href="{% url "topic:all_topic" %}">所有题目</a>{% endblock header_1 %}
+{% block header_2 %}待确认答辩{% endblock header_2 %}
+
+{% block body %}
+
+    <div class="card-body">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">姓名</th>
+                <th scope="col">论文</th>
+{#                <th scope="col">题目状态</th>#}
+                <th scope="col">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for key, value in result.items %}
+                <tr>
+                    <th scope="row">{{ key.name }}</th>
+                    <td><a
+                            href="http://172.16.43.128:8888/{{ value.file }}">{{ value.raw_name }}</a></td>
+{#                    <td>{{ row.get_accept_display }}</td>#}
+                    <td>
+                        <button type="button" class="btn btn-outline-info"><a href={% url "defense:confirm_defense" key.id %}>确认答辩</a></button>
+
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock body %}
+
+

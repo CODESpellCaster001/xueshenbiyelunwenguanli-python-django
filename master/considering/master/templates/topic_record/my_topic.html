@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}我的题目_毕业设计系统{% endblock title %}
+{% block header_1 %}<a href="{% url "topic:all_topic" %}">所有题目</a>{% endblock header_1 %}
+{% block header_2 %}我的选题{% endblock header_2 %}
+
+{% block body %}
+
+
+    <div class="card-body">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">题目名称</th>
+                <th scope="col">限选人数</th>
+                <th scope="col">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in result %}
+                <tr>
+                    <th scope="row">{{ row.id }}</th>
+                    <td>{{ row.title }}</td>
+                    <td>{{ row.limit_num }}</td>
+                    <td>
+                        <button type="button" class="btn btn-outline-info">
+                            <a href="{% url "topic:topic_detail" row.id %}">查看</a>
+                        </button>
+
+                        <button type="button" class="btn btn-warning">
+                            <a href="{% url "topic:edit_topic" row.id %}">编辑</a></button>
+                        |
+                        <button type="button" class="btn btn-danger">
+                            <a href="{% url "topic:delete_topic" row.id %}">删除</a>
+                        </button>
+
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+
+{% endblock body %}
+
+

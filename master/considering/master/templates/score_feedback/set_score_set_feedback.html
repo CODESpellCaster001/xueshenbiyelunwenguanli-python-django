@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load permission_tags %}
+{% block title %}所有题目_毕业设计系统{% endblock title %}
+{% block header_1 %}<a href="{% url "topic:all_topic" %}">所有题目</a>{% endblock header_1 %}
+{% block header_2 %}设置成绩与评价{% endblock header_2 %}
+
+{% block body %}
+    <div class="content mt-3">
+
+
+        <div class="card-body">
+            <div class="typo-headers">
+                <h4 class="pb-2 display-4">{{ title }}</h4>
+                <h5 class="pb-2 display-5">選題人：{{ student_name }}</h5>
+            </div>
+            <div class="typo-articles">
+                <p>
+                    {{ detail }}
+                </p>
+            </div>
+
+            <hr>
+
+            <div class="card">
+                <div class="card-header">
+                    <strong>{{ student_name }}</strong> 成绩与评价
+                </div>
+                <div class="card-body card-block">
+                    <form action="/score_feedback/set_score_set_feedback-{{ student_id }}/" method="post" class="">
+{#                    <form action="/score_feedback/waiting_for_score/" method="post" class="">#}
+                        <div class="form-group">
+                            <label for="score" class=" form-control-label">成绩</label>
+                            <input type="text" id="score" name="score" placeholder="输入成绩.."
+                                   class="form-control">
+                            {#                            <span class="help-block">Please enter your email</span>#}
+                        </div>
+                        <div class="form-group">
+                            <label for="feedback" class=" form-control-label">反馈</label>
+                            <textarea id="feedback" name="feedback" placeholder="输入评价.."
+                                      rows="7"
+                                      class="form-control"></textarea>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <i class="fa fa-dot-circle-o"></i> 提交
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+    </div> <!-- .content -->
+{% endblock %}

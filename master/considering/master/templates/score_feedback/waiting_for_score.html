@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load permission_tags %}
+{% block title %}待输入成绩名单_毕业设计系统{% endblock title %}
+{% block header_1 %}<a href="{% url "topic:all_topic" %}">所有题目</a>{% endblock header_1 %}
+{% block header_2 %}等待输入的成绩名单{% endblock header_2 %}
+
+{% block body %}
+
+    <div class="card-body">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">题目名称</th>
+                <th scope="col">学生姓名</th>
+                <th scope="col">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for student in result %}
+                {% for row in student %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ row.topic.title }}</td>
+                        <td>{{ row.student.name }}</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-info"><a
+                                    href="{% url "score_feedback:set_score_set_feedback" row.student.id %}">评分反馈</a></button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock body %}
+
+

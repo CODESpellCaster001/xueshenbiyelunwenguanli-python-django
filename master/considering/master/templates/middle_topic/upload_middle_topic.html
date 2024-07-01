@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}上传开题相关文档_毕业设计系统{% endblock title %}
+
+{% block header_1 %}<a href="{% url "topic:all_topic" %}">所有题目</a>{% endblock header_1 %}
+{% block header_2 %}上传中期报告{% endblock header_2 %}
+{% block topfiles %}
+    <script src="/static/vendors/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/plugins/editor.md-master/css/editormd.css"/>
+    <script src="/static/plugins/editor.md-master/editormd.js"></script>
+{% endblock topfiles %}
+{% block body %}
+
+
+    {#    <div>#}
+    {#        <form action="/topic/upload_research_proposal/" method="post" enctype="multipart/form-data">#}
+    {##}
+    {#            <label for="raw_name">名称</label>#}
+    {#            <input id="raw_name" type="text" name="raw_name" value="{{ raw_name }}">#}
+    {##}
+    {#            <label for="detail">描述</label>#}
+    {#            <input id="detail" type="text" name="detail" value="{{ detail }}">#}
+    {##}
+    {##}
+    {#            <input type="file" id="file" name="file">#}
+    {#            <input type="hidden" name="topic_id" value="">#}
+    {##}
+    {#            <input type="submit" value="OK">#}
+    {#        </form>#}
+    {##}
+    {#    </div>#}
+
+    <div class="col-xs-6 col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                <strong>中期文件上传</strong> <small> 上传你的中期相关文档</small>
+            </div>
+            <div class="card-body card-block">
+                <form method="post" action="/middle_topic/upload_middle_topic/" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class=" form-control-label">文件名</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-info"></i></div>
+                        <input class="form-control" type="text" name="raw_name" id="raw_name">
+                    </div>
+                    <!-- <small class="form-text text-muted">ex. 99/99/9999</small> -->
+                </div>
+
+                <div class="form-group">
+                    <label class=" form-control-label">文件</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-file-word-o"></i>
+                            <label for="file">选择文件</label>
+                            <input type="file" name="file" id="file">
+                        </div>
+                    </div>
+                    <!-- <small class="form-text text-muted">ex. (999) 999-9999</small> -->
+                </div>
+
+                <button type="submit" class="btn btn-outline-link btn-lg active">上传</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+{% endblock body %}
+
+{% block bottomfiles %}
+    <script>
+        var testEditor;
+        $(function () {
+            $.get("/static/plugins/editor.md-master/examples/test.md", function (md) {
+                testEditor = editormd("test-editormd", {
+                    width: "98%",
+                    height: 730,
+                    path: '/static/plugins/editor.md-master/lib/',
+                    markdown: md,
+                    codeFold: true,
+                    saveHTMLToTextarea: true,
+                    searchReplace: true,
+                    htmlDecode: "style,script,iframe|on*",
+                    emoji: true,
+                    taskList: true,
+                    tocm: true,         // Using [TOCM]
+                    tex: true,                   // 开启科学公式TeX语言支持，默认关闭
+                    flowChart: true,             // 开启流程图支持，默认关闭
+                    sequenceDiagram: true,       // 开启时序/序列图支持，默认关闭,
+                    imageUpload: true,
+                    imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                    imageUploadURL: "/static/plugins/editor.md-master/examples/php/upload.php",
+                    {#imageUploadURL: "{% url 'blog:blog_img_upload' %}",#}
+                    onload: function () {
+                        console.log('onload', this);
+                    },
+
+                    {#/**设置主题颜色 把这些注释去掉主题就是黑色的了*/#}
+                    {#editorTheme: "pastel-on-dark",#}
+                    {#theme: "dark",#}
+                    {#previewTheme: "dark"#}
+                });
+            });
+        });
+
+    </script>
+
+
+{% endblock bottomfiles %}

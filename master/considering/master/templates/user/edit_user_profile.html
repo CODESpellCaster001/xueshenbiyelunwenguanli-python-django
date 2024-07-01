@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}编辑个人信息{% endblock title %}
+{% block topfiles %}
+    <script src="/static/vendors/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/plugins/editor.md-master/css/editormd.css"/>
+    <script src="/static/plugins/editor.md-master/editormd.js"></script>
+{% endblock topfiles %}
+{% block body %}
+
+
+    <div>
+        <form action="/user/edit_user_profile/" method="post" enctype="multipart/form-data">
+            <label for="department">院系</label>
+            <input type="text" id="department" name="department" placeholder="{{ department }}" class="form-control">
+
+            <label for="email">电子邮箱</label>
+            <input type="text" id="email" name="email" placeholder="{{ email }}" class="form-control">
+
+            <label for="memo">自我介绍</label>
+            <input type="text" id="memo" name="memo" placeholder="{{ memo }}" class="form-control">
+
+            <button type="submit" class="btn btn-primary btn-sm">
+                <i class="fa fa-dot-circle-o"></i> 提交
+            </button>
+        </form>
+
+    </div>
+
+
+
+
+{% endblock body %}
+

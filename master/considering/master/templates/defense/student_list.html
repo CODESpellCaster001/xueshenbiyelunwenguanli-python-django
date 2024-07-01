@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load permission_tags %}
+{% block title %}待上传答辩文档列表_毕业设计系统{% endblock title %}
+{% block header_1 %}<a href="{% url "topic:all_topic" %}">所有题目</a>{% endblock header_1 %}
+{% block header_2 %}待上传答辩文档列表{% endblock header_2 %}
+
+{% block body %}
+
+    <div class="card-body">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">序号</th>
+                <th scope="col">学生姓名</th>
+                <th scope="col">学生选题</th>
+                <th scope="col">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for rows in result %}
+                {% for row in rows %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ row.student.name }}</td>
+                        <td>{{ row.topic.title }}</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-info"><a
+                                    href="{% url "defense:upload_graduation_topic" row.student.id %}">上传答辩文档</a>
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock body %}
+
+

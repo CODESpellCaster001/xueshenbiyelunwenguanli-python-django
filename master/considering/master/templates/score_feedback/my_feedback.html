@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}收到的学生评价{% endblock title %}
+{% block header_1 %}毕业设计管理{% endblock header_1 %}
+{% block header_2 %}评价列表{% endblock header_2 %}
+
+{% block body %}
+    <div class="card-body">
+        {% for feedback in result_list %}
+{#            <div class="typo-headers">#}
+{#                <h1 class="pb-2 display-4">??</h1>#}
+{#                <h3 class="pb-2 display-5">学生：</h3>#}
+{#                <hr>#}
+{#            </div>#}
+            <div class="typo-articles">
+                <p>
+                    {{ feedback }}
+                    <hr>
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock body %}

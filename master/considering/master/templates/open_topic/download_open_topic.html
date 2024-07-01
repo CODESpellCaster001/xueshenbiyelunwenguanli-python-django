@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load permission_tags %}
+{% block title %}下载开题文件_毕业设计系统{% endblock title %}
+{% block header_1 %}<a href="{% url "topic:all_topic" %}">所有题目</a>{% endblock header_1 %}
+{% block header_2 %}下载开题相关文档{% endblock header_2 %}
+
+{% block body %}
+
+    {% if user|has_role:'student' %}
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-dark">
+                    <strong class="card-title text-light"><font style="vertical-align: inherit;"><font
+                            style="vertical-align: inherit;">{{ open_topic_template.detail }}
+                        | {{ uploader_name }}</font></font></strong>
+                </div>
+                <div class="card-body text-white bg-danger">
+                    <p class="card-text text-light"><font style="vertical-align: inherit;"><font
+                            style="vertical-align: inherit;"><a
+                            href="http://172.16.43.128:8888/{{ open_topic_template.file }}">{{ open_topic_template.raw_name }}</a></font></font>
+                    </p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+
+    {% if user|has_role:'teacher' %}
+        {% for key, value in topic_annex_dict.items %}
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header bg-dark">
+                        <strong class="card-title text-light"><font style="vertical-align: inherit;"><font
+                                style="vertical-align: inherit;">{{ key.title }}</font></font></strong>
+                    </div>
+
+                    {% for annex in value %}
+
+                        <div class="card-body text-white bg-danger">
+
+                            <p class="card-text text-light"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;"><a
+                                    href="http://172.16.43.128:8888/{{ annex.file }}">{{ annex.raw_name }}</a></font></font>
+                                | {{ annex.uploader.name }}
+                            </p>
+
+                        </div>
+                        {#                        {% endfor %}#}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+{% endblock body %}
+
+

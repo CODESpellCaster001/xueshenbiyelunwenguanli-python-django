@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load permission_tags %}
+{% block title %}所有题目_毕业设计系统{% endblock title %}
+
+
+{% block body %}
+
+    <div class="card-body">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">题目名称</th>
+                <th scope="col">限选人数</th>
+                <th scope="col">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in result %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ row.title }}</td>
+                    <td>{{ row.limit_num }}</td>
+                    <td>
+                        <button type="button" class="btn btn-outline-info"><a href="{% url "topic:topic_detail" row.id %}">查看</a></button>
+                        {% if user|has_role:'student' %}
+{#                        <button type="button" class="btn btn-outline-primary"><a href="{% url "topic:choose_topic" row.id %}">选题</a></button>#}
+                        <button type="button" class="btn btn-outline-primary"><a href="{% url "choose_topic:choose_topic" row.id %}">选题</a></button>
+                        {% endif %}
+                        <!--
+                        <button type="button" class="btn btn-warning">编辑</button>
+                        |
+                        <button type="button" class="btn btn-danger">删除</button>
+                        -->
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock body %}
+
+
